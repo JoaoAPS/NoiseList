@@ -27,7 +27,6 @@ html {
 .btn {
   color: black;
   background-color: var(--main-bg-color);
-  border: solid 1px gray;
   border-radius: 10px 10px;
   padding: 2px 5px;
   cursor: pointer;
