@@ -1,8 +1,7 @@
+import Axios from "axios"
+
 const state = {
-  musics: [
-    { id: 0, title: "Dois Barcos", artist: "Los Hermanos" },
-    { id: 1, title: "Where I End and You Begin", artist: "Radiohead" },
-  ],
+  musics: [],
 }
 
 const getters = {
@@ -10,22 +9,41 @@ const getters = {
 }
 
 const actions = {
-  newMusic({ commit }, music) {
-    commit("newMusic", music)
+  async fetchMusics({ commit }) {
+    try {
+      const res = await Axios.get("http://localhost:7000/api/musics/")
+      commit("setMusics", res.data)
+    } catch (err) {
+      console.log(err.response)
+    }
   },
 
-  deleteMusic({ commit }, id) {
-    commit("deleteMusic", id)
+  async newMusic({ commit }, music) {
+    try {
+      const res = await Axios.post("http://localhost:7000/api/musics/", music)
+      commit("newMusic", res.data)
+    } catch (err) {
+      console.log(err.response)
+    }
+  },
+
+  async deleteMusic({ commit }, id) {
+    try {
+      await Axios.delete(`http://localhost:7000/api/musics/${id}`)
+      commit("deleteMusic", id)
+    } catch (err) {
+      console.log(err.response)
+    }
   },
 }
 
 const mutations = {
+  setMusics(state, musics) {
+    state.musics = musics
+  },
+
   newMusic(state, music) {
-    state.musics.push({
-      id: state.musics.length + 1, //Isso vai dar ruim
-      title: music.title,
-      artist: music.artist,
-    })
+    state.musics.push(music)
   },
 
   deleteMusic(state, id) {

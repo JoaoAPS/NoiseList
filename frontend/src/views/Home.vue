@@ -28,12 +28,16 @@ export default {
   computed: mapGetters(["allMusics"]),
 
   methods: {
-    ...mapActions(["newMusic", "deleteMusic"]),
+    ...mapActions(["fetchMusics", "newMusic", "deleteMusic"]),
 
     newMusic_local(newMusicData) {
       this.newMusic(newMusicData)
       this.show_form = false
     },
+  },
+
+  created() {
+    this.fetchMusics()
   },
 }
 </script>
