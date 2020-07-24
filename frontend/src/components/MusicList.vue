@@ -4,7 +4,7 @@
       v-for="music in musics"
       v-bind:key="music.id"
       v-bind:music="music"
-      v-on:click.native="$emit('delete', music)"
+      v-on:click.native="$emit('edit', music)"
     />
   </div>
 </template>

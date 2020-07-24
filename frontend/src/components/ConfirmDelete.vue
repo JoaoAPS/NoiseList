@@ -1,6 +1,6 @@
 <template>
   <Modal v-on:background-click="$emit('cancel')">
-    <h3>Delete {{ music.title }}?</h3>
+    <h3><span class="alert">Delete</span> {{ music.title }}?</h3>
 
     <button class="btn confirm" @click="$emit('confirm', music)">Yes</button>
     <button class="btn cancel" @click="$emit('cancel')">No</button>
@@ -46,11 +46,7 @@ button {
   font-weight: bold;
 }
 
-.confirm:hover {
-  background-color: #10f020;
-}
-
-.cancel:hover {
-  background-color: #f02010;
+.alert {
+  color: red;
 }
 </style>

@@ -1,32 +1,55 @@
 <template>
-  <Modal v-on:background-click="$emit('cancel')" modalClass="music-editor">
-    <h3>Add a new music</h3>
+  <div>
+    <Modal v-show="!askingDelete" v-on:background-click="$emit('cancel')" modalClass="music-editor">
+      <h3>{{ headerText }}</h3>
 
-    <form id="edit-form">
-      <input type="text" v-model="title" placeholder="Music title" />
-      <input type="text" v-model="artist" placeholder="Artist" />
+      <form id="edit-form">
+        <input type="text" v-model="tmpMusic.title" placeholder="Music title" />
+        <input type="text" v-model="tmpMusic.artist" placeholder="Artist" />
 
-      <div class="btn-container">
-        <button class="btn confirm" @click="$emit('confirm', { title, artist })">
-          Add Music
-        </button>
-        <button class="btn cancel" @click="$emit('cancel')">Cancel</button>
-      </div>
-    </form>
-  </Modal>
+        <span class="fas fa-trash delete-icon" @click="askingDelete = true"></span>
+
+        <div class="btn-container">
+          <button class="btn confirm" @click="$emit(music ? 'edit' : 'new', tmpMusic)">
+            {{ confirmBtnText }}
+          </button>
+          <button class="btn cancel" @click="$emit('cancel')">Cancel</button>
+        </div>
+      </form>
+    </Modal>
+
+    <ConfirmDelete
+      v-if="askingDelete"
+      v-bind:music="music"
+      v-on:cancel="askingDelete = false"
+      v-on:confirm="$emit('delete', music)"
+    />
+  </div>
 </template>
 
 <script>
 import Modal from "./generic/Modal"
+import ConfirmDelete from "./ConfirmDelete"
 
 export default {
   name: "MusicEditor",
-  components: { Modal },
+  components: { Modal, ConfirmDelete },
+  props: ["music"],
+
   data() {
     return {
-      title: "",
-      artist: "",
+      tmpMusic: this.music ? { ...this.music } : { title: "", artist: "" },
+      askingDelete: false,
     }
+  },
+  computed: {
+    headerText() {
+      return this.music ? "Edit Music" : "Add a new music"
+    },
+
+    confirmBtnText() {
+      return this.music ? "Confirm" : "Add Music"
+    },
   },
 }
 </script>
@@ -75,8 +98,17 @@ input[type="text"] {
   font-size: 1em;
 }
 
+.delete-icon {
+  margin: auto 10% 0 auto;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
 .btn-container {
-  margin: auto 10% 50px 10%;
+  margin: 10px 10% 50px 10%;
   text-align: center;
 }
 
