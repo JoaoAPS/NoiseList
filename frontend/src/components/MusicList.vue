@@ -4,7 +4,7 @@
       v-for="music in musics"
       v-bind:key="music.id"
       v-bind:music="music"
-      v-on:click.native="$emit('delete', music.id)"
+      v-on:click.native="$emit('delete', music)"
     />
   </div>
 </template>
@@ -18,11 +18,6 @@ export default {
     MusicItem,
   },
   props: ["musics"],
-  methods: {
-    log() {
-      console.log(123)
-    },
-  },
 }
 </script>
 
