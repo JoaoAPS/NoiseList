@@ -1,19 +1,22 @@
 <template>
   <div>
-    <Modal v-show="!askingDelete" v-on:background-click="$emit('cancel')" modalClass="music-editor">
+    <Modal v-show="!askingDelete" v-on:background-click="$emit('cancel')" class="music-editor">
       <h3>{{ headerText }}</h3>
 
-      <form id="edit-form">
-        <input type="text" v-model="tmpMusic.title" placeholder="Music title" />
-        <input type="text" v-model="tmpMusic.artist" placeholder="Artist" />
+      <form id="edit-form" @submit.prevent="$emit(music ? 'edit' : 'new', tmpMusic)">
+        <label for="title">Song title</label>
+        <input type="text" required id="title" v-model="tmpMusic.title" />
+
+        <label for="artist">Artist</label>
+        <input type="text" required id="artist" v-model="tmpMusic.artist" />
 
         <span class="fas fa-trash delete-icon" @click="askingDelete = true"></span>
 
         <div class="btn-container">
-          <button class="btn confirm" @click="$emit(music ? 'edit' : 'new', tmpMusic)">
+          <button type="submit" class="btn confirm" form="edit-form">
             {{ confirmBtnText }}
           </button>
-          <button class="btn cancel" @click="$emit('cancel')">Cancel</button>
+          <button type="button" class="btn cancel" @click="$emit('cancel')">Cancel</button>
         </div>
       </form>
     </Modal>
@@ -48,14 +51,14 @@ export default {
     },
 
     confirmBtnText() {
-      return this.music ? "Confirm" : "Add Music"
+      return this.music ? "Confirm edit" : "Add Music"
     },
   },
 }
 </script>
 
 <style scoped>
-.modal-container >>> .music-editor {
+.music-editor >>> .modal {
   position: fixed;
   top: 10vh;
   left: 50vw;
@@ -64,6 +67,7 @@ export default {
 
   height: 500px;
   width: 800px;
+  padding: 15px 120px;
 
   background-color: var(--main-bg-color);
   border: solid 1px gray;
@@ -71,13 +75,10 @@ export default {
 
   display: grid;
   grid-template-rows: auto 1fr;
-
-  padding: 15px 0;
 }
 
 h3 {
   grid-row: 1/2;
-  margin: 0 10%;
 }
 
 form {
@@ -85,21 +86,31 @@ form {
 
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+}
+
+label {
+  margin: 30px 0px 5px 10px;
+  font-size: 0.9rem;
 }
 
 input[type="text"] {
-  margin: 15px 10%;
   padding: 5px 5px;
+  font-size: 1rem;
 
-  border: none;
+  border: 1px solid gray;
   border-radius: 4px 4px;
 
-  font-size: 1em;
+  transition: all 0.2s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: solid 1px black;
+  box-shadow: 1px 1px gray;
 }
 
 .delete-icon {
-  margin: auto 10% 0 auto;
+  margin: auto 0 0 auto;
   cursor: pointer;
 }
 
@@ -108,7 +119,7 @@ input[type="text"] {
 }
 
 .btn-container {
-  margin: 10px 10% 50px 10%;
+  margin: 10px 0 50px 0;
   text-align: center;
 }
 
