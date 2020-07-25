@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     
     # Internal
     'musics',
+    'instruments',
+    'languages',
+    'tags',
 ]
 
 MIDDLEWARE = [
