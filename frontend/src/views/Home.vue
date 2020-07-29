@@ -37,7 +37,7 @@ export default {
   computed: mapGetters(["allMusics"]),
 
   methods: {
-    ...mapActions(["fetchMusics", "newMusic", "editMusic", "deleteMusic"]),
+    ...mapActions(["fetchMusics", "newMusic", "editMusic", "deleteMusic", "fetchLanguages"]),
 
     openNewMusic() {
       this.targetMusic = undefined
@@ -67,6 +67,7 @@ export default {
 
   created() {
     this.fetchMusics()
+    this.fetchLanguages()
   },
 }
 </script>

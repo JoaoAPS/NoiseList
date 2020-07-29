@@ -2,14 +2,16 @@
   <div class="music-list">
     <MusicItem
       v-for="music in musics"
-      v-bind:key="music.id"
-      v-bind:music="music"
+      :key="music.id"
+      :music="music"
+      :language="music.language ? allLanguages.find(lang => lang.id === music.language) : null"
       v-on:click.native="$emit('edit', music)"
     />
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import MusicItem from "./MusicItem"
 
 export default {
@@ -18,6 +20,8 @@ export default {
     MusicItem,
   },
   props: ["musics"],
+
+  computed: mapGetters(["allLanguages"]),
 }
 </script>
 

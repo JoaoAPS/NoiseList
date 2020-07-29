@@ -10,7 +10,15 @@
         <label for="artist">Artist</label>
         <input type="text" required id="artist" v-model="tmpMusic.artist" />
 
-        <span class="fas fa-trash delete-icon" @click="askingDelete = true"></span>
+        <label for="language">Language</label>
+        <select id="language" v-model="tmpMusic.language">
+          <option value="null">-----</option>
+          <option v-for="language in allLanguages" :key="language.id" :value="language.id">
+            {{ language.name }}
+          </option>
+        </select>
+
+        <i class="fas fa-trash delete-icon" @click="askingDelete = true"></i>
 
         <div class="btn-container">
           <button type="submit" class="btn confirm" form="edit-form">
@@ -31,6 +39,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import Modal from "./generic/Modal"
 import ConfirmDelete from "./ConfirmDelete"
 
@@ -41,11 +50,14 @@ export default {
 
   data() {
     return {
-      tmpMusic: this.music ? { ...this.music } : { title: "", artist: "" },
+      tmpMusic: this.music ? { ...this.music } : { title: "", artist: "", language: null },
+      languageId: this.music ? this.music.language : -1,
       askingDelete: false,
     }
   },
   computed: {
+    ...mapGetters(["allLanguages"]),
+
     headerText() {
       return this.music ? "Edit Music" : "Add a new music"
     },
@@ -107,6 +119,15 @@ input[type="text"]:focus {
   outline: none;
   border: solid 1px black;
   box-shadow: 1px 1px gray;
+}
+
+option {
+  text-transform: capitalize;
+}
+
+.blank-option {
+  color: gray;
+  text-emphasis: italic;
 }
 
 .delete-icon {
