@@ -1,8 +1,6 @@
 <template>
   <div>
     <Modal v-show="!askingDelete" v-on:background-click="$emit('cancel')" class="music-editor">
-      <h3>{{ headerText }}</h3>
-
       <form id="edit-form" @submit.prevent="$emit(music ? 'edit' : 'new', tmpMusic)">
         <label for="title">Song title</label>
         <input type="text" required id="title" v-model="tmpMusic.title" />
@@ -18,15 +16,40 @@
           </option>
         </select>
 
-        <i class="fas fa-trash delete-icon" @click="askingDelete = true"></i>
-
-        <div class="btn-container">
-          <button type="submit" class="btn confirm" form="edit-form">
-            {{ confirmBtnText }}
-          </button>
-          <button type="button" class="btn cancel" @click="$emit('cancel')">Cancel</button>
+        <label>Tags</label>
+        <div class="tag-container">
+          <Tag
+            v-for="tag in allTags"
+            :key="tag.id"
+            :tag="tag"
+            class="tag"
+            :class="{ tag_active: tmpMusic.tags.includes(tag.id) }"
+            @click.native="toggleTag(tag.id)"
+          />
         </div>
+
+        <label>Instruments</label>
+        <div class="instrument-container">
+          <span
+            v-for="instrument in allInstruments"
+            :key="instrument.key"
+            class="instrument"
+            :class="{ instrument_active: tmpMusic.instruments.includes(instrument.id) }"
+            @click="toggleInstrument(instrument.id)"
+          >
+            {{ instrument.name }}
+          </span>
+        </div>
+
+        <i class="fas fa-trash delete-icon" @click="askingDelete = true"></i>
       </form>
+
+      <div class="btn-container">
+        <button type="submit" class="btn confirm" form="edit-form">
+          {{ confirmBtnText }}
+        </button>
+        <button type="button" class="btn cancel" @click="$emit('cancel')">Cancel</button>
+      </div>
     </Modal>
 
     <ConfirmDelete
@@ -41,22 +64,26 @@
 <script>
 import { mapGetters } from "vuex"
 import Modal from "./generic/Modal"
+import Tag from "./Tag"
 import ConfirmDelete from "./ConfirmDelete"
 
 export default {
   name: "MusicEditor",
-  components: { Modal, ConfirmDelete },
+  components: { Modal, Tag, ConfirmDelete },
   props: ["music"],
 
   data() {
     return {
-      tmpMusic: this.music ? { ...this.music } : { title: "", artist: "", language: null },
+      tmpMusic: this.music
+        ? { ...this.music }
+        : { title: "", artist: "", language: null, tags: [], instruments: [] },
       languageId: this.music ? this.music.language : -1,
       askingDelete: false,
     }
   },
+
   computed: {
-    ...mapGetters(["allLanguages"]),
+    ...mapGetters(["allLanguages", "allTags", "allInstruments"]),
 
     headerText() {
       return this.music ? "Edit Music" : "Add a new music"
@@ -64,6 +91,24 @@ export default {
 
     confirmBtnText() {
       return this.music ? "Confirm edit" : "Add Music"
+    },
+  },
+
+  methods: {
+    toggleTag(tagId) {
+      if (this.tmpMusic.tags.includes(tagId)) {
+        this.tmpMusic.tags = this.tmpMusic.tags.filter(id => id != tagId)
+      } else {
+        this.tmpMusic.tags.push(tagId)
+      }
+    },
+
+    toggleInstrument(instrumentId) {
+      if (this.tmpMusic.instruments.includes(instrumentId)) {
+        this.tmpMusic.instruments = this.tmpMusic.instruments.filter(id => id != instrumentId)
+      } else {
+        this.tmpMusic.instruments.push(instrumentId)
+      }
     },
   },
 }
@@ -77,7 +122,7 @@ export default {
   transform: translateX(-50%);
   z-index: 100;
 
-  height: 500px;
+  height: 80vh;
   width: 800px;
   padding: 15px 120px;
 
@@ -86,18 +131,20 @@ export default {
   border-radius: 15px 15px;
 
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto;
 }
 
 h3 {
   grid-row: 1/2;
 }
 
-form {
+#edit-form {
   grid-row: 2/3;
+  padding-right: 15px;
 
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 label {
@@ -107,7 +154,7 @@ label {
 
 input[type="text"] {
   padding: 5px 5px;
-  font-size: 1rem;
+  font-size: 0.8rem;
 
   border: 1px solid gray;
   border-radius: 4px 4px;
@@ -130,6 +177,27 @@ option {
   text-emphasis: italic;
 }
 
+.tag {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.tag_active {
+  border: solid 2px green;
+  box-shadow: 0 0 5px green;
+}
+
+.instrument {
+  margin-right: 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.instrument_active {
+  color: green;
+  font-weight: 600;
+}
+
 .delete-icon {
   margin: auto 0 0 auto;
   cursor: pointer;
@@ -140,7 +208,8 @@ option {
 }
 
 .btn-container {
-  margin: 10px 0 50px 0;
+  grid-row: 3/4;
+  margin: 10px 0 20px 0;
   text-align: center;
 }
 

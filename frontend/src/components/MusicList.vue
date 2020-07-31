@@ -5,7 +5,9 @@
       :key="music.id"
       :music="music"
       :language="music.language ? allLanguages.find(lang => lang.id === music.language) : null"
-      v-on:click.native="$emit('edit', music)"
+      :tags="allTags.filter(tag => music.tags.includes(tag.id))"
+      :instruments="allInstruments.filter(inst => music.instruments.includes(inst.id))"
+      @click.native="$emit('edit', music)"
     />
   </div>
 </template>
@@ -21,7 +23,7 @@ export default {
   },
   props: ["musics"],
 
-  computed: mapGetters(["allLanguages"]),
+  computed: mapGetters(["allLanguages", "allTags", "allInstruments"]),
 }
 </script>
 

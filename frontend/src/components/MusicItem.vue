@@ -15,12 +15,12 @@
     </div>
 
     <div class="tags">
-      <Tag v-for="tag in music.tags" :key="tag.id" :tag="tag" />
+      <Tag v-for="tag in tags" :key="tag.id" :tag="tag" class="tag" />
     </div>
 
     <div class="instruments">
       <i
-        v-for="instrument in music.instruments"
+        v-for="instrument in instruments"
         :key="instrument.key"
         class="instrument fas fa-music"
         v-tooltip.top-end="instrument.name"
@@ -35,7 +35,7 @@ import Tag from "./Tag"
 export default {
   name: "MusicItem",
   components: { Tag },
-  props: ["music", "language"],
+  props: ["music", "language", "tags", "instruments"],
 }
 </script>
 
@@ -94,5 +94,9 @@ img {
 .tags {
   grid-column: 2/3;
   margin-left: 20px;
+}
+
+.tag {
+  margin-right: 10px;
 }
 </style>
