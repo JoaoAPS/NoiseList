@@ -44,10 +44,11 @@ $instrument-symbol-width: 20px;
 $item-height: 3.5rem;
 
 .music-item {
-  width: 90%;
+  //width: 90%;
   height: $item-height;
 
-  margin: 1rem auto 0 auto;
+  //margin: 1rem auto 0 auto;
+  margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
 
   border-bottom: solid 2px black;

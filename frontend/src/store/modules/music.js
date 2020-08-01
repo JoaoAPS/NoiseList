@@ -7,6 +7,28 @@ const state = {
 
 const getters = {
   allMusics: state => state.musics,
+
+  filteredMusics: state => filters => {
+    let filteredMusics = [...state.musics]
+
+    if (Array.isArray(filters.languages) && filters.languages.length > 0) {
+      filteredMusics = filteredMusics.filter(music => filters.languages.includes(music.language))
+    }
+
+    if (Array.isArray(filters.tags) && filters.tags.length > 0) {
+      filteredMusics = filteredMusics.filter(music =>
+        music.tags.some(tag => filters.tags.includes(tag))
+      )
+    }
+
+    if (Array.isArray(filters.instruments) && filters.instruments.length > 0) {
+      filteredMusics = filteredMusics.filter(music =>
+        music.instruments.some(instrument => filters.instruments.includes(instrument))
+      )
+    }
+
+    return filteredMusics
+  },
 }
 
 const actions = {

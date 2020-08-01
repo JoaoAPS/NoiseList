@@ -13,8 +13,9 @@ export default {
 <style scoped>
 header {
   width: 100%;
-  height: 1.5rem;
+  /* height: 1.5rem; */
   font-size: 1rem;
+  padding: 10px;
 
   background-color: #2a2a33;
 

@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <Header v-on:new-music="openNewMusic" />
-    <MusicList v-bind:musics="allMusics" v-on:edit="openEditMusic" />
+  <div class="main-container">
+    <Header v-on:new-music="openNewMusic" class="header" />
+    <Filters class="filters" :filters="filters" />
+    <MusicList
+      class="music-list"
+      v-bind:musics="filteredMusics(filters)"
+      v-on:edit="openEditMusic"
+      :key="musicListKey"
+    />
 
     <MusicEditor
       v-if="show_editor"
@@ -16,15 +22,17 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import MusicList from "@/components/MusicList.vue"
 import Header from "@/components/Header.vue"
+import Filters from "@/components/Filters.vue"
+import MusicList from "@/components/MusicList.vue"
 import MusicEditor from "@/components/MusicEditor.vue"
 
 export default {
   name: "Home",
   components: {
-    MusicList,
     Header,
+    Filters,
+    MusicList,
     MusicEditor,
   },
 
@@ -32,9 +40,14 @@ export default {
     return {
       show_editor: false,
       targetMusic: undefined,
+      filters: {
+        languages: [],
+        tags: [],
+        instruments: [],
+      },
     }
   },
-  computed: mapGetters(["allMusics"]),
+  computed: mapGetters(["allMusics", "filteredMusics"]),
 
   methods: {
     ...mapActions([
@@ -81,3 +94,24 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.main-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+}
+
+.header {
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.filters {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.music-list {
+  grid-area: 2 / 2 / 3 / 3;
+}
+</style>

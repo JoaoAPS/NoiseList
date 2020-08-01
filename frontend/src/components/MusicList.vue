@@ -27,4 +27,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.music-list {
+  padding: 8px 1rem;
+  display: flex;
+  flex-direction: column;
+}
+</style>
