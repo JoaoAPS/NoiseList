@@ -1,5 +1,7 @@
 <template>
   <div class="filter-container">
+    <button type="button" class="close-btn" @click="$emit('close')">X</button>
+
     <button type="button" class="btn clear-btn" @click="clearFilters">Clear</button>
 
     <label>Language</label>
@@ -100,11 +102,29 @@ export default {
 <style lang="scss" scoped>
 .filter-container {
   width: 200px;
+  position: relative;
 
   border-right: solid 2px black;
   box-shadow: 5px 0px 5px -5px grey;
 
   text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 }
 
 .clear-btn {

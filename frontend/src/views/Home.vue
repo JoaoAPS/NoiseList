@@ -1,12 +1,28 @@
 <template>
   <div class="main-container">
     <Header v-on:new-music="openNewMusic" class="header" />
-    <Filters class="filters" :filters="filters" />
+
+    <transition name="slideLeft">
+      <Filters
+        v-if="show_filters"
+        class="filters"
+        :filters="filters"
+        @close="show_filters = false"
+      />
+    </transition>
+    <button
+      type="button"
+      v-if="!show_filters"
+      class="show-filters-btn"
+      @click="show_filters = true"
+    >
+      &gt;&gt;
+    </button>
+
     <MusicList
       class="music-list"
       v-bind:musics="filteredMusics(filters)"
       v-on:edit="openEditMusic"
-      :key="musicListKey"
     />
 
     <MusicEditor
@@ -45,6 +61,7 @@ export default {
         tags: [],
         instruments: [],
       },
+      show_filters: true,
     }
   },
   computed: mapGetters(["allMusics", "filteredMusics"]),
@@ -95,7 +112,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .main-container {
   min-height: 100vh;
   display: grid;
@@ -109,9 +126,32 @@ export default {
 
 .filters {
   grid-area: 2 / 1 / 3 / 2;
+  transition: all 0.5s;
+}
+
+.slideLeft-enter,
+.slideLeft-leave-to {
+  transform: translateX(-100%);
 }
 
 .music-list {
   grid-area: 2 / 2 / 3 / 3;
+}
+
+.show-filters-btn {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  left: -50%;
+  top: 5px;
+
+  border: solid 1px black;
+  border-radius: 50% 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: gray;
+  }
 }
 </style>
