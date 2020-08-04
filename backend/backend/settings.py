@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     
     # Internal
     'musics',
+    'artists',
     'instruments',
     'languages',
     'tags',
