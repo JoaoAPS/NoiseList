@@ -17,11 +17,24 @@ const actions = {
       console.log(err.response)
     }
   },
+
+  async newTag({ commit }, tag) {
+    try {
+      const res = await Axios.post("http://localhost:7000/api/tags/", tag)
+      commit("newTag", res.data)
+    } catch (err) {
+      console.log(err.response)
+    }
+  },
 }
 
 const mutations = {
   setTags(state, tags) {
     state.tags = tags
+  },
+
+  newTag(state, tag) {
+    state.tags.push(tag)
   },
 }
 

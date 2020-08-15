@@ -45,6 +45,11 @@
             @click.native="toggleTag(tag.id)"
           />
         </div>
+        <div class="newtag-container">
+          <input type="text" placeholder="New tag" class="newtag-input" v-model="newtag" />
+          <input type="text" placeholder="Color" class="newtag-color" v-model="newtagcolor" />
+          <button type="button" class="newtag-btn" @click="addtag">Add tag</button>
+        </div>
 
         <label class="title-label">Instruments</label>
         <div class="instrument-container">
@@ -97,6 +102,8 @@ export default {
         : { title: "", artist: null, artist_name: "", language: null, tags: [], instruments: [] },
       languageId: this.music ? this.music.language : -1,
       askingDelete: false,
+      newtag: "",
+      newtagcolor: "",
     }
   },
 
@@ -146,6 +153,18 @@ export default {
       } else {
         this.tmpMusic.instruments.push(instrumentId)
       }
+    },
+
+    addtag() {
+      if (!this.newtag) return
+
+      this.$emit(
+        "newtag",
+        this.newtagcolor ? { name: this.newtag, color: this.newtagcolor } : { name: this.newtag }
+      )
+
+      this.newtag = ""
+      this.newtagcolor = ""
     },
   },
 }
@@ -270,6 +289,34 @@ option {
 .tag {
   margin-right: 10px;
   cursor: pointer;
+}
+
+.newtag {
+  &-input,
+  &-color {
+    border: none;
+    padding: 5px;
+    background: none;
+  }
+
+  &-color {
+    width: 80px;
+  }
+
+  &-btn {
+    width: 3rem;
+    padding: 3px;
+    margin: 10px;
+    background: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+    text-transform: capitalize;
+
+    &:hover {
+      color: green;
+    }
+  }
 }
 
 .tag_active {

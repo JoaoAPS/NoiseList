@@ -28,10 +28,11 @@
     <MusicEditor
       v-if="show_editor"
       v-bind:music="targetMusic"
-      v-on:new="dispatchNewMusic"
-      v-on:edit="dispatchEditMusic"
-      v-on:delete="dispatchDeleteMusic"
-      v-on:cancel="show_editor = false"
+      @new="dispatchNewMusic"
+      @edit="dispatchEditMusic"
+      @delete="dispatchDeleteMusic"
+      @newtag="newTag($event)"
+      @cancel="show_editor = false"
     />
   </div>
 </template>
@@ -69,14 +70,15 @@ export default {
   methods: {
     ...mapActions([
       "fetchMusics",
-      "newMusic",
-      "editMusic",
-      "deleteMusic",
       "fetchArtists",
-      "newArtist",
       "fetchLanguages",
       "fetchTags",
       "fetchInstruments",
+      "newMusic",
+      "newArtist",
+      "newTag",
+      "editMusic",
+      "deleteMusic",
     ]),
 
     openNewMusic() {
