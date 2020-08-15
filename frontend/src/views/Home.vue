@@ -61,10 +61,10 @@ export default {
         tags: [],
         instruments: [],
       },
-      show_filters: true,
+      show_filters: false,
     }
   },
-  computed: mapGetters(["allMusics", "filteredMusics"]),
+  computed: mapGetters(["allMusics", "filteredMusics", "getArtistByName"]),
 
   methods: {
     ...mapActions([
@@ -72,6 +72,8 @@ export default {
       "newMusic",
       "editMusic",
       "deleteMusic",
+      "fetchArtists",
+      "newArtist",
       "fetchLanguages",
       "fetchTags",
       "fetchInstruments",
@@ -87,12 +89,20 @@ export default {
       this.show_editor = true
     },
 
-    dispatchNewMusic(music) {
+    async dispatchNewMusic(music, newArtist) {
+      music.artist = newArtist
+        ? (await this.newArtist(newArtist)).id
+        : this.getArtistByName(music.artist_name).id
+
       this.newMusic(music)
       this.show_editor = false
     },
 
-    dispatchEditMusic(music) {
+    async dispatchEditMusic(music, newArtist) {
+      music.artist = newArtist
+        ? (await this.newArtist(newArtist)).id
+        : this.getArtistByName(music.artist_name).id
+
       this.editMusic(music)
       this.show_editor = false
     },
@@ -105,6 +115,7 @@ export default {
 
   created() {
     this.fetchMusics()
+    this.fetchArtists()
     this.fetchLanguages()
     this.fetchTags()
     this.fetchInstruments()

@@ -10,7 +10,7 @@
           width="20"
           height="15"
         />
-        <span class="music-artist">{{ music.artist }}</span>
+        <span class="music-artist">{{ music.artist_name }}</span>
       </p>
     </div>
 
