@@ -1,0 +1,18 @@
+  version: '3'
+    
+  services:
+    backend:
+      build: ./backend
+      container_name: "NoiseList_backend"
+      command: python manage.py runserver 0.0.0.0:7000
+      ports:
+        - "7000:7000"
+    
+    frontend:
+      build: ./frontend
+      container_name: "NoiseList_frontend"
+      command: npm run serve
+      volumes:
+        - ./frontend/src:/frontend/src
+      ports:
+        - "8080:8080"
