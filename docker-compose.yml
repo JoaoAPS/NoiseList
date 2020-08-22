@@ -4,6 +4,8 @@
     backend:
       build: ./backend
       container_name: "NoiseList_backend"
+      environment:
+        - DEBUG=1
       command: python manage.py runserver 0.0.0.0:7000
       ports:
         - "7000:7000"
