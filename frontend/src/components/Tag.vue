@@ -1,5 +1,5 @@
 <template>
-  <div class="tag" :style="'background-color: ' + tag.color">
+  <div class="tag" :style="'color: ' + tag.color">
     {{ tag.name }}
   </div>
 </template>
@@ -16,9 +16,9 @@ export default {
   display: inline-block;
   padding: 4px 6px;
   border-radius: 10px 10px;
+  text-decoration: underline;
 
-  color: black;
   font-size: 0.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 </style>
