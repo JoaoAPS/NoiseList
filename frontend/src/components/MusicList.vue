@@ -1,5 +1,5 @@
 <template>
-  <div class="music-list">
+  <b-card-group deck class="p-md-3">
     <MusicItem
       v-for="music in musics"
       :key="music.id"
@@ -9,7 +9,7 @@
       :instruments="allInstruments.filter(inst => music.instruments.includes(inst.id))"
       @click.native="$emit('edit', music)"
     />
-  </div>
+  </b-card-group>
 </template>
 
 <script>
@@ -27,10 +27,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.music-list {
-  padding: 8px 1rem;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped></style>

@@ -1,4 +1,23 @@
 <template>
+  <b-card :title="music.title" class="music-card">
+    <div class="card-subtitle text-muted">
+      {{ music.artist_name }}
+
+      <img
+        v-if="language"
+        :src="require(`@/assets/flags/${language.imageFileName}`)"
+        :alt="`(${language})`"
+        width="20"
+        height="15"
+        class="float-right"
+      />
+    </div>
+
+    <b-card-text v-if="tags.length != 0" class="border-top pt-1">
+      <Tag v-for="tag in tags" :key="tag.id" :tag="tag" class="tag" />
+    </b-card-text>
+  </b-card>
+  <!--
   <div class="music-item">
     <div class="music-identification">
       <p class="music-title">{{ music.title }}</p>
@@ -26,7 +45,8 @@
         v-tooltip.top-end="instrument.name"
       ></i>
     </div>
-  </div>
+    </div>
+  -->
 </template>
 
 <script>
@@ -39,65 +59,18 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$instrument-symbol-width: 20px;
-$item-height: 3.5rem;
-
-.music-item {
-  //width: 90%;
-  height: $item-height;
-
-  //margin: 1rem auto 0 auto;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
-
-  border-bottom: solid 2px black;
-  border-radius: 2px 2px;
+<style scoped>
+.music-card {
+  min-width: 400px;
+  margin-bottom: 15px;
   cursor: pointer;
-
-  display: grid;
-  grid-template-columns: minmax(300px, auto) 1fr 3 * $instrument-symbol-width;
 }
 
-.music-identification {
-  grid-column: 1/2;
-  height: 0.9 * $item-height;
+.card-title {
+  font-size: 1.3rem;
 }
 
-.music-title {
-  font-size: 1.2rem;
-}
-
-.music-artist {
-  font-size: 0.8rem;
-  color: gray;
-}
-
-img {
-  margin-right: 5px;
-}
-
-.instruments {
-  grid-column: 3/4;
-  height: 0.9 * $item-height;
-
-  margin-left: 15px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.instrument {
-  width: $instrument-symbol-width;
-  font-size: 0.8rem;
-}
-
-.tags {
-  grid-column: 2/3;
-  margin-left: 20px;
-}
-
-.tag {
-  margin-right: 10px;
+.card-subtitle {
+  font-size: 0.9rem;
 }
 </style>
