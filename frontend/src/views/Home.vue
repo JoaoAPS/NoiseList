@@ -128,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 .main-container {
   min-height: 100vh;
+  background-color: #f0f0f0;
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;

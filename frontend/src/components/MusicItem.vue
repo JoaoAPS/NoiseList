@@ -1,5 +1,5 @@
 <template>
-  <b-card :title="music.title" class="music-card">
+  <b-card :title="music.title" class="music-card mb-3">
     <div class="card-subtitle text-muted">
       {{ music.artist_name }}
 
@@ -17,36 +17,6 @@
       <Tag v-for="tag in tags" :key="tag.id" :tag="tag" class="tag" />
     </b-card-text>
   </b-card>
-  <!--
-  <div class="music-item">
-    <div class="music-identification">
-      <p class="music-title">{{ music.title }}</p>
-      <p>
-        <img
-          v-if="language"
-          :src="require(`@/assets/flags/${language.imageFileName}`)"
-          :alt="`(${language})`"
-          width="20"
-          height="15"
-        />
-        <span class="music-artist">{{ music.artist_name }}</span>
-      </p>
-    </div>
-
-    <div class="tags">
-      <Tag v-for="tag in tags" :key="tag.id" :tag="tag" class="tag" />
-    </div>
-
-    <div class="instruments">
-      <i
-        v-for="instrument in instruments"
-        :key="instrument.key"
-        class="instrument fas fa-music"
-        v-tooltip.top-end="instrument.name"
-      ></i>
-    </div>
-    </div>
-  -->
 </template>
 
 <script>
@@ -62,7 +32,6 @@ export default {
 <style scoped>
 .music-card {
   min-width: 400px;
-  margin-bottom: 15px;
   cursor: pointer;
 }
 
