@@ -1,23 +1,8 @@
 <template>
   <b-container fluid class="main-container p-0">
-    <Header class="header" />
+    <Header class="header" @togglefilter="show_filters = !show_filters" />
 
-    <transition name="slideLeft">
-      <Filters
-        v-if="show_filters"
-        class="filters"
-        :filters="filters"
-        @close="show_filters = false"
-      />
-    </transition>
-    <button
-      type="button"
-      v-if="!show_filters"
-      class="show-filters-btn"
-      @click="show_filters = true"
-    >
-      &gt;&gt;
-    </button>
+    <Filters :filters="filters" />
 
     <MusicList
       class="music-list"
@@ -27,17 +12,6 @@
     />
 
     <NewMusic @new="dispatchNewMusic" />
-
-    <!--
-    <MusicEditor
-      v-bind:music="targetMusic"
-      @new="dispatchNewMusic"
-      @edit="dispatchEditMusic"
-      @delete="dispatchDeleteMusic"
-      @newtag="newTag($event)"
-      @cancel="show_editor = false"
-    />
-    -->
   </b-container>
 </template>
 

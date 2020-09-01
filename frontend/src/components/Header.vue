@@ -1,6 +1,7 @@
 <template>
-  <header>
-    <p class="btn new-music" v-b-modal="'new-music-modal'">New music</p>
+  <header class="bg-dark">
+    <button v-b-modal="'new-music-modal'" class="btn btn-dark btn-sm">New music</button>
+    <button v-b-toggle:filters-sidebar class="btn btn-dark btn-sm">Filters</button>
   </header>
 </template>
 
@@ -16,7 +17,7 @@ header {
   font-size: 1rem;
   padding: 10px;
 
-  background-color: #2a2a33;
+  /*background-color: #2a2a33;*/
 
   display: flex;
   align-items: center;
@@ -27,15 +28,14 @@ header p {
   margin: 0 15px;
 }
 
-.new-music {
+.header-item {
   font-size: 0.8rem;
   color: white;
-  background-color: #2a2a33;
   border: none;
+  cursor: pointer;
 }
 
-.new-music:hover {
-  color: #45ba27;
-  font-weight: bold;
+.header-item:hover {
+  text-decoration: underline;
 }
 </style>
