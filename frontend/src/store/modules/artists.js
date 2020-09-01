@@ -5,9 +5,9 @@ const state = {
 }
 
 const getters = {
+  getArtist: state => id => state.artists.find(artist => artist.id === id),
   allArtists: state => state.artists,
   allArtistsNames: state => state.artists.map(artist => artist.name).sort(),
-  getArtistByName: state => name => state.artists.find(artist => artist.name === name),
 }
 
 const actions = {

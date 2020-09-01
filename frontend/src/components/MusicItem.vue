@@ -33,6 +33,11 @@ export default {
 .music-card {
   min-width: 400px;
   cursor: pointer;
+  border: none;
+}
+
+.music-card:hover {
+  box-shadow: 0px 1px 2px gray;
 }
 
 .card-title {

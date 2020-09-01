@@ -1,6 +1,6 @@
 <template>
-  <div class="main-container">
-    <Header v-on:new-music="openNewMusic" class="header" />
+  <b-container fluid class="main-container p-0">
+    <Header class="header" />
 
     <transition name="slideLeft">
       <Filters
@@ -22,11 +22,14 @@
     <MusicList
       class="music-list"
       v-bind:musics="filteredMusics(filters)"
-      v-on:edit="openEditMusic"
+      @edit="dispatchEditMusic"
+      @delete="dispatchDeleteMusic"
     />
 
+    <NewMusic @new="dispatchNewMusic" />
+
+    <!--
     <MusicEditor
-      v-if="show_editor"
       v-bind:music="targetMusic"
       @new="dispatchNewMusic"
       @edit="dispatchEditMusic"
@@ -34,7 +37,8 @@
       @newtag="newTag($event)"
       @cancel="show_editor = false"
     />
-  </div>
+    -->
+  </b-container>
 </template>
 
 <script>
@@ -42,7 +46,7 @@ import { mapGetters, mapActions } from "vuex"
 import Header from "@/components/Header.vue"
 import Filters from "@/components/Filters.vue"
 import MusicList from "@/components/MusicList.vue"
-import MusicEditor from "@/components/MusicEditor.vue"
+import NewMusic from "@/components/NewMusic.vue"
 
 export default {
   name: "Home",
@@ -50,7 +54,7 @@ export default {
     Header,
     Filters,
     MusicList,
-    MusicEditor,
+    NewMusic,
   },
 
   data: () => {
@@ -81,37 +85,28 @@ export default {
       "deleteMusic",
     ]),
 
-    openNewMusic() {
-      this.targetMusic = undefined
-      this.show_editor = true
-    },
-
-    openEditMusic(music) {
-      this.targetMusic = music
-      this.show_editor = true
-    },
-
-    async dispatchNewMusic(music, newArtist) {
-      music.artist = newArtist
-        ? (await this.newArtist(newArtist)).id
-        : this.getArtistByName(music.artist_name).id
+    async dispatchNewMusic(music) {
+      if (music.artist === -1) {
+        music.artist = (
+          await this.newArtist({ name: music.artist_name, defaultLanguage: music.language })
+        ).id
+      }
 
       this.newMusic(music)
-      this.show_editor = false
     },
 
-    async dispatchEditMusic(music, newArtist) {
-      music.artist = newArtist
-        ? (await this.newArtist(newArtist)).id
-        : this.getArtistByName(music.artist_name).id
+    async dispatchEditMusic(music) {
+      if (music.artist === -1) {
+        music.artist = (
+          await this.newArtist({ name: music.artist_name, defaultLanguage: music.language })
+        ).id
+      }
 
       this.editMusic(music)
-      this.show_editor = false
     },
 
     dispatchDeleteMusic(music) {
       this.deleteMusic(music.id)
-      this.show_editor = false
     },
   },
 

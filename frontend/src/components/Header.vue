@@ -1,6 +1,6 @@
 <template>
   <header>
-    <p class="btn new-music" v-on:click="$emit('new-music')">New music</p>
+    <p class="btn new-music" v-b-modal="'new-music-modal'">New music</p>
   </header>
 </template>
 
@@ -12,8 +12,7 @@ export default {
 
 <style scoped>
 header {
-  width: 100%;
-  /* height: 1.5rem; */
+  width: 100vw;
   font-size: 1rem;
   padding: 10px;
 

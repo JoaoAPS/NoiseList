@@ -18,7 +18,7 @@ export default {
   border-radius: 10px 10px;
   text-decoration: underline;
 
-  font-size: 0.5rem;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 500;
 }
 </style>
