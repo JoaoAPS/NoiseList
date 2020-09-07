@@ -6,7 +6,12 @@
       label-cols-lg="2"
       label-align-lg="right"
     >
-      <b-form-input id="song-title-field" v-model="music.title" type="text" required></b-form-input>
+      <b-form-input
+        id="song-title-field"
+        v-model="music.title"
+        type="text"
+        size="sm"
+      ></b-form-input>
     </b-form-group>
 
     <b-form-group label="Artist" label-for="artist-field" label-cols-lg="2" label-align-lg="right">

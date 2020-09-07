@@ -1,17 +1,27 @@
 <template>
   <b-container fluid class="main-container p-0">
-    <Header class="header" @togglefilter="show_filters = !show_filters" />
+    <div
+      v-if="isLoading"
+      class="d-flex align-items-center justify-content-center"
+      style="width: 100vw; height:100vh;"
+    >
+      <b-spinner label="Loading" class="m-auto"></b-spinner>
+    </div>
 
-    <Filters :filters="filters" />
+    <template v-else>
+      <Header class="header" @togglefilter="show_filters = !show_filters" />
 
-    <MusicList
-      class="music-list"
-      v-bind:musics="filteredMusics(filters)"
-      @edit="dispatchEditMusic"
-      @delete="dispatchDeleteMusic"
-    />
+      <Filters :filters="filters" />
 
-    <NewMusic @new="dispatchNewMusic" />
+      <MusicList
+        class="music-list"
+        v-bind:musics="filteredMusics(filters)"
+        @edit="dispatchEditMusic"
+        @delete="dispatchDeleteMusic"
+      />
+
+      <NewMusic @new="dispatchNewMusic" />
+    </template>
   </b-container>
 </template>
 
@@ -33,8 +43,7 @@ export default {
 
   data: () => {
     return {
-      show_editor: false,
-      targetMusic: undefined,
+      isLoading: true,
       filters: {
         languages: [],
         tags: [],
@@ -67,6 +76,7 @@ export default {
       }
 
       this.newMusic(music)
+      this.showAlert("Music created!")
     },
 
     async dispatchEditMusic(music) {
@@ -77,24 +87,42 @@ export default {
       }
 
       this.editMusic(music)
+      this.showAlert("Music edited!")
     },
 
     dispatchDeleteMusic(music) {
       this.deleteMusic(music.id)
+      this.showAlert("Music deleted!")
+    },
+
+    showAlert(msg) {
+      this.$bvToast.toast(msg, {
+        noCloseButton: true,
+        autoHideDelay: 2000,
+        variant: "success",
+      })
     },
   },
 
-  created() {
+  mounted() {
+    this.isLoading = true
+
     this.fetchMusics()
     this.fetchArtists()
     this.fetchLanguages()
     this.fetchTags()
     this.fetchInstruments()
+
+    this.isLoading = false
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.tmp {
+  width: 100%;
+}
+
 .main-container {
   min-height: 100vh;
   background-color: #f0f0f0;
@@ -135,6 +163,13 @@ export default {
 
   &:hover {
     background-color: gray;
+  }
+
+  /deep/ .popout-alert {
+    position: fixed;
+    top: 15px;
+    left: 50vw;
+    transform: translateX(-50%);
   }
 }
 </style>
