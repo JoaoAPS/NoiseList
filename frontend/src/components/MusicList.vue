@@ -20,6 +20,7 @@
       :music="music"
       @edit="$emit('edit', $event)"
       @delete="$emit('delete', $event)"
+      @newtag="$emit('newtag', $event)"
     />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <b-modal id="new-music-modal" title="Add a Song" size="lg">
-    <MusicForm :music="newMusic" />
+    <MusicForm :music="newMusic" @newtag="$emit('newtag', $event)" />
 
     <template v-slot:modal-footer="{ ok, cancel }">
       <b-button

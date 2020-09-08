@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal :id="`modal-${music.id}`" title="Edit Music" size="lg">
-      <MusicForm :music="editedMusic" />
+      <MusicForm :music="editedMusic" @newtag="$emit('newtag', $event)" />
 
       <template v-slot:modal-footer="{ ok, cancel }">
         <i class="fas fa-trash delete-icon" v-b-modal="`delete-modal-${music.id}`"></i>

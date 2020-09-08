@@ -18,9 +18,10 @@
         v-bind:musics="filteredMusics(filters)"
         @edit="dispatchEditMusic"
         @delete="dispatchDeleteMusic"
+        @newtag="newTag"
       />
 
-      <NewMusic @new="dispatchNewMusic" />
+      <NewMusic @new="dispatchNewMusic" @newtag="newTag" />
     </template>
   </b-container>
 </template>
