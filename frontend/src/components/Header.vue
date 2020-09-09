@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 header {
-  width: 100vw;
+  width: 100%;
   font-size: 1rem;
   padding: 10px;
 
@@ -40,7 +40,7 @@ header {
 }
 
 .header-item {
-  width: 150px;
+  width: 170px;
 }
 
 .header-item:hover {

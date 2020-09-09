@@ -129,11 +129,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tmp {
-  width: 100%;
-}
-
 .main-container {
+  width: 100%;
   min-height: 100vh;
   background-color: #f0f0f0;
   display: grid;
