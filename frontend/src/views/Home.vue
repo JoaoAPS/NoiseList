@@ -47,6 +47,7 @@ export default {
       isLoading: true,
       filters: {
         languages: [],
+        styles: [],
         tags: [],
         instruments: [],
       },
@@ -60,6 +61,7 @@ export default {
       "fetchMusics",
       "fetchArtists",
       "fetchLanguages",
+      "fetchStyles",
       "fetchTags",
       "fetchInstruments",
       "newMusic",
@@ -111,6 +113,7 @@ export default {
     this.fetchMusics()
     this.fetchArtists()
     this.fetchLanguages()
+    this.fetchStyles()
     this.fetchTags()
     this.fetchInstruments()
 

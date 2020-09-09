@@ -43,6 +43,7 @@ export default {
         title: "",
         artist: null,
         language: null,
+        style: null,
         tags: [],
         instruments: [],
       },

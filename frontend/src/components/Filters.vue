@@ -22,6 +22,19 @@
         </div>
       </div>
 
+      <label>Style</label>
+      <div class="style-container">
+        <div
+          v-for="style in allStyles"
+          :key="style.id"
+          class="style"
+          :class="{ style_active: filters.styles.includes(style.id) }"
+          @click="toggleStyle(style.id)"
+        >
+          <span>{{ style.name }}</span>
+        </div>
+      </div>
+
       <label>Tags</label>
       <div class="tag-container">
         <Tag
@@ -61,11 +74,12 @@ export default {
 
   props: ["filters"],
 
-  computed: mapGetters(["allLanguages", "allTags", "allInstruments"]),
+  computed: mapGetters(["allLanguages", "allStyles", "allTags", "allInstruments"]),
 
   methods: {
     clearFilters() {
       this.filters.languages = []
+      this.filters.styles = []
       this.filters.tags = []
       this.filters.instruments = []
     },
@@ -75,6 +89,14 @@ export default {
         this.filters.languages = this.filters.languages.filter(id => id != languageId)
       } else {
         this.filters.languages.push(languageId)
+      }
+    },
+
+    toggleStyle(styleId) {
+      if (this.filters.styles.includes(styleId)) {
+        this.filters.styles = this.filters.styles.filter(id => id != styleId)
+      } else {
+        this.filters.styles.push(styleId)
       }
     },
 
@@ -99,7 +121,6 @@ export default {
 
 <style lang="scss" scoped>
 .filter-container {
-  /*width: 200px;*/
   position: relative;
 
   border-right: solid 2px black;
@@ -115,6 +136,7 @@ label {
 }
 
 .language,
+.style,
 .instrument {
   margin: 10px 10px;
   font-size: 0.8rem;
@@ -125,6 +147,14 @@ label {
     color: green;
     font-weight: 600;
   }
+}
+
+.style {
+  &-container {
+    display: flex;
+  }
+
+  margin: 10px 15px;
 }
 
 img,

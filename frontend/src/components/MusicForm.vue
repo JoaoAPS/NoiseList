@@ -43,6 +43,16 @@
       </v-select>
     </b-form-group>
 
+    <b-form-group label="Style" label-for="style-field" label-cols-lg="2" label-align-lg="right">
+      <v-select
+        id="style-field"
+        v-model="music.style"
+        :options="styleFormOptions"
+        :reduce="option => option.value"
+      >
+      </v-select>
+    </b-form-group>
+
     <hr />
     <b-form-group label="Tags">
       <div class="tag-container container">
@@ -96,7 +106,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["allLanguages", "allTags", "allInstruments", "allArtists", "getArtist"]),
+    ...mapGetters([
+      "allLanguages",
+      "allStyles",
+      "allTags",
+      "allInstruments",
+      "allArtists",
+      "getArtist",
+    ]),
 
     artistFormOptions() {
       return this.allArtists.map(artist => ({
@@ -109,6 +126,13 @@ export default {
       return this.allLanguages.map(language => ({
         label: language.name,
         value: language.id,
+      }))
+    },
+
+    styleFormOptions() {
+      return this.allStyles.map(style => ({
+        label: style.name,
+        value: style.id,
       }))
     },
 
@@ -211,204 +235,4 @@ export default {
     font-weight: 600;
   }
 }
-
-/*
-/deep/ .modal {
-  position: fixed;
-  top: 5vh;
-  left: 50vw;
-  transform: translateX(-50%);
-  z-index: 100;
-
-  height: 85vh;
-  width: 1000px;
-  padding: 15px 120px;
-
-  background-color: var(--main-bg-color);
-  border: solid 1px gray;
-  border-radius: 15px 15px;
-
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-.info {
-  font-style: italic;
-  font-size: 0.7rem;
-  color: green;
-  margin-top: 5px;
-}
-
-h3 {
-  grid-row: 1/2;
-}
-
-#edit-form {
-  grid-row: 2/3;
-  padding-right: 15px;
-
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-
-#edit-form::-webkit-scrollbar {
-  display: none;
-}
-
-.title-label {
-  margin: 30px 0px 5px 10px;
-  font-size: 0.9rem;
-}
-
-.input-field {
-  padding: 5px 5px;
-  font-size: 0.8rem;
-
-  background: white;
-  color: black;
-
-  border: 1px solid gray;
-  border-radius: 4px 4px;
-
-  transition: all 0.2s;
-}
-
-.input-field:focus {
-  outline: none;
-  border: solid 1px black;
-  box-shadow: 1px 1px gray;
-}
-
-/deep/ .v-select {
-  & .vs__dropdown-toggle {
-    padding: 0;
-    background: white;
-
-    border: 1px solid gray;
-    border-radius: 4px 4px;
-
-    font-size: 0.8rem;
-  }
-
-  & .vs__selected-options {
-    padding: 5px;
-    border: none;
-  }
-
-  & .vs__selected,
-  & .vs__search {
-    padding: 0px;
-    margin: 0px;
-    line-height: 1;
-    color: black;
-  }
-
-  & .vs__clear {
-    display: none;
-  }
-
-  & .vs__open-indicator {
-    fill: black;
-  }
-}
-
-option {
-  text-transform: capitalize;
-}
-
-#defLangCheckbox {
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.blank-option {
-  color: gray;
-  text-emphasis: italic;
-}
-
-.tag {
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.newtag {
-  &-input,
-  &-color {
-    border: none;
-    padding: 5px;
-    background: none;
-  }
-
-  &-color {
-    width: 80px;
-  }
-
-  &-btn {
-    width: 3rem;
-    padding: 3px;
-    margin: 10px;
-    background: none;
-    border-radius: 5px;
-
-    cursor: pointer;
-    text-transform: capitalize;
-
-    &:hover {
-      color: green;
-    }
-  }
-}
-
-.tag_active {
-  border: solid 2px green;
-  box-shadow: 0 0 5px green;
-}
-
-.instrument {
-  margin-right: 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.instrument_active {
-  color: green;
-  font-weight: 600;
-}
-
-.delete-icon {
-  margin: auto 0 0 auto;
-  cursor: pointer;
-}
-
-.delete-icon:hover {
-  color: red;
-}
-
-.btn-container {
-  grid-row: 3/4;
-  margin: 10px 0 10px 0;
-  text-align: center;
-}
-
-button {
-  width: 150px;
-  margin: 0 15px;
-  padding: 10px 10px;
-
-  border: none;
-
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.confirm:hover {
-  background-color: #10f020;
-}
-
-.cancel:hover {
-  background-color: #f02010;
-}
-*/
 </style>

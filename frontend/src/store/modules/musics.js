@@ -15,6 +15,10 @@ const getters = {
       filteredMusics = filteredMusics.filter(music => filters.languages.includes(music.language))
     }
 
+    if (Array.isArray(filters.styles) && filters.styles.length > 0) {
+      filteredMusics = filteredMusics.filter(music => filters.styles.includes(music.style))
+    }
+
     if (Array.isArray(filters.tags) && filters.tags.length > 0) {
       filteredMusics = filteredMusics.filter(music =>
         music.tags.some(tag => filters.tags.includes(tag))
