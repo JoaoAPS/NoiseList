@@ -5,7 +5,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('musics.urls')),
     path('api/', include('artists.urls')),
-    path('api/', include('instruments.urls')),
     path('api/', include('languages.urls')),
+    path('api/', include('styles.urls')),
     path('api/', include('tags.urls')),
+    path('api/', include('instruments.urls')),
 ]
