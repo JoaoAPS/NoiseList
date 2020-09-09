@@ -1,13 +1,29 @@
 <template>
   <header class="bg-dark">
-    <button v-b-modal="'new-music-modal'" class="btn btn-dark btn-sm">New music</button>
-    <button v-b-toggle:filters-sidebar class="btn btn-dark btn-sm">Filters</button>
+    <button v-b-modal="'new-music-modal'" class="header-item mx-2 btn btn-dark btn-sm">
+      New music
+    </button>
+    <button v-b-toggle:filters-sidebar class="header-item mx-2 btn btn-dark btn-sm">Filters</button>
+
+    <b-form-input
+      v-model="searchText"
+      :placeholder="'\uf002'"
+      class="search-bar text-light bg-dark"
+      @update="$emit('search', searchText)"
+      style="font-family: Cambria, FontAwesome"
+    ></b-form-input>
   </header>
 </template>
 
 <script>
 export default {
   name: "Header",
+
+  data() {
+    return {
+      searchText: "",
+    }
+  },
 }
 </script>
 
@@ -23,19 +39,16 @@ header {
   align-items: center;
 }
 
-header p {
-  display: inline-block;
-  margin: 0 15px;
-}
-
 .header-item {
-  font-size: 0.8rem;
-  color: white;
-  border: none;
-  cursor: pointer;
+  width: 150px;
 }
 
 .header-item:hover {
   text-decoration: underline;
+}
+
+.search-bar {
+  border: none;
+  margin: 0 20px;
 }
 </style>

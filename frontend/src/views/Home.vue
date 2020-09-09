@@ -9,7 +9,11 @@
     </div>
 
     <template v-else>
-      <Header class="header" @togglefilter="show_filters = !show_filters" />
+      <Header
+        class="header"
+        @togglefilter="show_filters = !show_filters"
+        @search="filters.search = $event"
+      />
 
       <Filters :filters="filters" />
 
@@ -51,6 +55,7 @@ export default {
         styles: [],
         tags: [],
         instruments: [],
+        search: "",
       },
       show_filters: false,
     }

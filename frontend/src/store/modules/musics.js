@@ -35,6 +35,15 @@ const getters = {
       )
     }
 
+    if (filters.search) {
+      const searchText = filters.search.toLowerCase()
+      filteredMusics = filteredMusics.filter(
+        music =>
+          music.title.toLowerCase().includes(searchText) ||
+          music.artist_name.toLowerCase().includes(searchText)
+      )
+    }
+
     return filteredMusics
   },
 }
