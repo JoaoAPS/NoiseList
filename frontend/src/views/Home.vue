@@ -46,6 +46,7 @@ export default {
     return {
       isLoading: true,
       filters: {
+        artist: null,
         languages: [],
         styles: [],
         tags: [],

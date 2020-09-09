@@ -11,6 +11,10 @@ const getters = {
   filteredMusics: state => filters => {
     let filteredMusics = [...state.musics]
 
+    if (filters.artist) {
+      filteredMusics = filteredMusics.filter(music => music.artist === filters.artist)
+    }
+
     if (Array.isArray(filters.languages) && filters.languages.length > 0) {
       filteredMusics = filteredMusics.filter(music => filters.languages.includes(music.language))
     }

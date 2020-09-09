@@ -3,6 +3,14 @@
     <div class="filter-container">
       <button type="button" class="btn btn-primary" @click="clearFilters">Clear</button>
 
+      <label for="artist_filter">Artist</label>
+      <v-select
+        v-model="filters.artist"
+        :options="artistFormOptions"
+        :reduce="option => option.value"
+        id="artist_filter"
+      ></v-select>
+
       <label>Language</label>
       <div class="language-container">
         <div
@@ -74,10 +82,20 @@ export default {
 
   props: ["filters"],
 
-  computed: mapGetters(["allLanguages", "allStyles", "allTags", "allInstruments"]),
+  computed: {
+    ...mapGetters(["allArtists", "allLanguages", "allStyles", "allTags", "allInstruments"]),
+
+    artistFormOptions() {
+      return this.allArtists.map(artist => ({
+        label: artist.name,
+        value: artist.id,
+      }))
+    },
+  },
 
   methods: {
     clearFilters() {
+      this.filters.artist = null
       this.filters.languages = []
       this.filters.styles = []
       this.filters.tags = []
@@ -133,6 +151,11 @@ label {
   display: block;
   font-size: 1.2rem;
   margin-top: 1rem;
+}
+
+#artist_filter {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .language,
