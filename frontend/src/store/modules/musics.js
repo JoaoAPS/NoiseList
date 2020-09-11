@@ -44,7 +44,9 @@ const getters = {
       )
     }
 
-    return filteredMusics
+    return filteredMusics.sort((music1, music2) =>
+      music1.artist_name < music2.artist_name ? -1 : 1
+    )
   },
 }
 

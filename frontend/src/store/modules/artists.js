@@ -6,7 +6,8 @@ const state = {
 
 const getters = {
   getArtist: state => id => state.artists.find(artist => artist.id === id),
-  allArtists: state => state.artists,
+  allArtists: state =>
+    state.artists.sort((artist1, artist2) => (artist1.name < artist2.name ? -1 : 1)),
   allArtistsNames: state => state.artists.map(artist => artist.name).sort(),
 }
 
