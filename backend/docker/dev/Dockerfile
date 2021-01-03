@@ -10,8 +10,10 @@ RUN mkdir /backend
 COPY . /backend/
 WORKDIR /backend
 
-RUN if [ ! -f db.sqlite3 ]; then cp initial_db.sqlite3 db.sqlite3; fi
+COPY ./docker/dev/entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 
 RUN adduser -D user
 RUN chown -R user /backend
+RUN chown user /entrypoint.sh
 USER user
