@@ -1,22 +1,27 @@
-  version: '3'
-    
-  services:
-    backend:
-      build: ./backend
-      container_name: "NoiseList_backend"
-      environment:
-        - DEBUG=1
-      command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:7000"
-      volumes:
-        - ./backend/db.sqlite3:/backend/db.sqlite3
-      ports:
-        - "7000:7000"
-    
-    frontend:
-      build: ./frontend
-      container_name: "NoiseList_frontend"
-      command: npm run serve
-      volumes:
-        - ./frontend/src:/frontend/src
-      ports:
-        - "8080:8080"
+version: '3'
+  
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: docker/dev/Dockerfile
+    container_name: "NoiseList_backend_dev"
+    env_file:
+      - ./backend/docker/dev/.env
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:7000"
+    volumes:
+      - ./backend:/backend
+      - ./backend/db.sqlite3:/backend/db.sqlite3
+    ports:
+      - "7000:7000"
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: docker/dev/Dockerfile
+    container_name: "NoiseList_frontend_dev"
+    command: npm run serve
+    volumes:
+      - ./frontend/src:/frontend/src
+    ports:
+      - "8080:8080"
