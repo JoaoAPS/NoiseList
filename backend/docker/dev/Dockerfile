@@ -10,6 +10,8 @@ RUN mkdir /backend
 COPY . /backend/
 WORKDIR /backend
 
+RUN if [ ! -f db.sqlite3 ]; then cp initial_db.sqlite3 db.sqlite3; fi
+
 RUN adduser -D user
 RUN chown -R user /backend
 USER user

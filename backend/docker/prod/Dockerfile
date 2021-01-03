@@ -14,6 +14,8 @@ RUN mkdir /files
 COPY ./docker/prod/entrypoint.sh /files
 RUN chmod +x /files/entrypoint.sh
 
+RUN if [ ! -f db.sqlite3 ]; then cp initial_db.sqlite3 db.sqlite3; fi
+
 RUN adduser -D user
 RUN chown -R user /backend
 RUN chown -R user /files
