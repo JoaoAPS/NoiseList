@@ -174,16 +174,23 @@ export default {
 
   watch: {
     artist() {
-      if (this.artist) {
+      if (! this.artist) {
+        this.music.artist_name = ""
+        this.music.artist = null
+        return
+      }
+      
+      if (typeof(this.artist) == "string") {
+        this.music.artist_name = this.artist
+        this.music.artist = -1
+      }
+      else {
         this.music.artist_name = this.artist.label
         this.music.artist = this.artist.value ? this.artist.value : -1
 
         if (!this.music.language && this.artist.value > -1) {
           this.music.language = this.getArtist(this.artist.value).defaultLanguage
         }
-      } else {
-        this.music.artist_name = ""
-        this.music.artist = null
       }
     },
   },

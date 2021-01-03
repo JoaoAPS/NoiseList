@@ -60,7 +60,7 @@ export default {
       show_filters: false,
     }
   },
-  computed: mapGetters(["allMusics", "filteredMusics", "getArtistByName"]),
+  computed: mapGetters(["allMusics", "filteredMusics"]),
 
   methods: {
     ...mapActions([

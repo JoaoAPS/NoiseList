@@ -9,7 +9,6 @@ services:
     env_file:
       - ./backend/docker/prod/.env
     volumes:
-      # - ./backend/db.sqlite3:/backend/db.sqlite3
       - ./backend/data:/backend/data
     ports:
       - "7000:7000"
