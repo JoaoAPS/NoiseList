@@ -15,5 +15,6 @@ RUN chmod +x /entrypoint.sh
 
 RUN adduser -D user
 RUN chown -R user:user /backend
+RUN chown user:user /backend/data
 RUN chown user:user /entrypoint.sh
 USER user
