@@ -14,6 +14,6 @@ COPY ./docker/prod/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 RUN adduser -D user
-RUN chown -R user /backend
-RUN chown user /entrypoint.sh
+RUN chown -R user:user /backend
+RUN chown user:user /entrypoint.sh
 USER user
