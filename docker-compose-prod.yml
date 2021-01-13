@@ -10,9 +10,16 @@ services:
       - ./backend/docker/prod/.env
     volumes:
       - ./backend/data:/backend/data
+    expose:
+      - 7001
+    command: sh /entrypoint.sh
+    
+  nginx-backend:
+    build: backend/docker/prod/nginx/
     ports:
       - "7000:7000"
-    command: sh /entrypoint.sh
+    depends_on:
+      - backend
       
   frontend:
     build:
