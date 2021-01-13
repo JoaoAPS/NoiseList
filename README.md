@@ -4,6 +4,10 @@ Noise List
 Noise list is an application to keep track of musics you know, so you never forget them.
 It is specially useful to remeber musics you know how to play.
 
+Each music in the list also holds information about its language, tags the user can create,
+and instruments in which you can play the music.
+
+-->  [Live Demo](http://35.198.7.228/)  <--
 
 ## Instalation
 
@@ -19,4 +23,4 @@ It is specially useful to remeber musics you know how to play.
 This will run the developer version.
 To run the production version, run `docker-compose -f docker-compose-prod.yml up`.
 Note that you first have to create a `.env` file on `backend/docker/prod/` with the enviroment variables.
-They are similar to those in `backend/docker/dev/.env`, but should also include a ALLOWED_HOSTS variable.
+They are similar to those in `backend/docker/dev/.env`.
