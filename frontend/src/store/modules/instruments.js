@@ -11,7 +11,7 @@ const getters = {
 const actions = {
   async fetchInstruments({ commit }) {
     try {
-      const res = await Axios.get("http://localhost:7000/api/instruments/")
+      const res = await Axios.get("/api/instruments/")
       commit("setInstruments", res.data)
     } catch (err) {
       console.log(err.response)

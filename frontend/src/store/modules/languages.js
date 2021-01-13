@@ -11,7 +11,7 @@ const getters = {
 const actions = {
   async fetchLanguages({ commit }) {
     try {
-      const res = await Axios.get("http://localhost:7000/api/languages/")
+      const res = await Axios.get("/api/languages/")
       commit("setLanguages", res.data)
     } catch (err) {
       console.log(err.response)

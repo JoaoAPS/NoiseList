@@ -14,7 +14,7 @@ const getters = {
 const actions = {
   async fetchArtists({ commit }) {
     try {
-      const res = await Axios.get("http://localhost:7000/api/artists/")
+      const res = await Axios.get("/api/artists/")
       commit("setArtists", res.data)
     } catch (err) {
       console.log(err.response)
@@ -23,7 +23,7 @@ const actions = {
 
   async newArtist({ commit }, artist) {
     try {
-      const res = await Axios.post("http://localhost:7000/api/artists/", artist)
+      const res = await Axios.post("/api/artists/", artist)
       commit("newArtist", res.data)
       return res.data
     } catch (err) {

@@ -11,7 +11,7 @@ const getters = {
 const actions = {
   async fetchStyles({ commit }) {
     try {
-      const res = await Axios.get("http://localhost:7000/api/styles/")
+      const res = await Axios.get("/api/styles/")
       commit("setStyles", res.data)
     } catch (err) {
       console.log(err.response)

@@ -53,7 +53,7 @@ const getters = {
 const actions = {
   async fetchMusics({ commit }) {
     try {
-      const res = await Axios.get("http://localhost:7000/api/musics/")
+      const res = await Axios.get("/api/musics/")
       commit("setMusics", res.data)
     } catch (err) {
       console.log(err.response)
@@ -62,7 +62,7 @@ const actions = {
 
   async newMusic({ commit }, music) {
     try {
-      const res = await Axios.post("http://localhost:7000/api/musics/", music)
+      const res = await Axios.post("/api/musics/", music)
       commit("newMusic", res.data)
     } catch (err) {
       console.log(err.response)
@@ -71,7 +71,7 @@ const actions = {
 
   async editMusic({ commit }, music) {
     try {
-      const res = await Axios.put(`http://localhost:7000/api/musics/${music.id}/`, music)
+      const res = await Axios.put(`/api/musics/${music.id}/`, music)
       commit("editMusic", res.data)
     } catch (err) {
       console.log(err.response)
@@ -80,7 +80,7 @@ const actions = {
 
   async deleteMusic({ commit }, id) {
     try {
-      await Axios.delete(`http://localhost:7000/api/musics/${id}/`)
+      await Axios.delete(`/api/musics/${id}/`)
       commit("deleteMusic", id)
     } catch (err) {
       console.log(err.response)

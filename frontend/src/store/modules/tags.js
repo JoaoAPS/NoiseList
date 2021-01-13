@@ -11,7 +11,7 @@ const getters = {
 const actions = {
   async fetchTags({ commit }) {
     try {
-      const res = await Axios.get("http://localhost:7000/api/tags/")
+      const res = await Axios.get("/api/tags/")
       commit("setTags", res.data)
     } catch (err) {
       console.log(err.response)
@@ -20,7 +20,7 @@ const actions = {
 
   async newTag({ commit }, tag) {
     try {
-      const res = await Axios.post("http://localhost:7000/api/tags/", tag)
+      const res = await Axios.post("/api/tags/", tag)
       commit("newTag", res.data)
     } catch (err) {
       console.log(err.response)
