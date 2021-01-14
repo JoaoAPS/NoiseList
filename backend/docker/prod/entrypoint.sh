@@ -7,4 +7,4 @@ if [ ! -f /backend/data/db.sqlite3 ]; then
 	python manage.py migrate
 fi
 
-gunicorn backend.wsgi -b 0.0.0.0:7001
+gunicorn backend.wsgi -b 0.0.0.0:7000
