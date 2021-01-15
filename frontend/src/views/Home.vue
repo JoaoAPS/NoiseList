@@ -179,4 +179,10 @@ export default {
     transform: translateX(-50%);
   }
 }
+
+@media (max-width: 500px) {
+  .music-list {
+    margin-top: 50px;
+  }
+}
 </style>

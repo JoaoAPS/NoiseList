@@ -47,4 +47,19 @@ export default {
 .card-subtitle {
   font-size: 0.9rem;
 }
+
+@media (max-width: 400px) {
+  .music-card {
+    width: 80vw;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.7rem;
+  }
+}
 </style>

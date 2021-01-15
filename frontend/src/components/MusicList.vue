@@ -42,4 +42,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@media (max-width: 400px) {
+  .card-deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>

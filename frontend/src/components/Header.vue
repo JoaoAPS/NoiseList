@@ -1,6 +1,6 @@
 <template>
   <header class="bg-dark">
-    <button v-b-modal="'new-music-modal'" class="header-item mx-2 btn btn-dark btn-sm">
+    <button v-b-modal="'new-music-modal'" class="header-item mx-2 btn btn-dark btn-sm text-primary">
       New music
     </button>
     <button v-b-toggle:filters-sidebar class="header-item mx-2 btn btn-dark btn-sm">Filters</button>
@@ -50,5 +50,20 @@ header {
 .search-bar {
   border: none;
   margin: 0 20px;
+}
+
+@media (max-width: 400px) {
+  header {
+    flex-wrap: wrap-reverse;
+  }
+
+  .header-item {
+    width: 40%;
+  }
+
+  .search-bar {
+    width: 80%;
+    margin: 0 auto 10px auto;
+  }
 }
 </style>
