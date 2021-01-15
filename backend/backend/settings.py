@@ -136,9 +136,6 @@ STATIC_URL = '/static/'
 
 
 # Cross-Origin Resource Sharing (CORS)
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8080",
-    "http://localhost:8000",
-    "http://localhost:80",
-    "http://localhost",
-]
+CORS_ORIGIN_WHITELIST = os.environ.get('CORS_ORIGIN_WHITELIST')
+if CORS_ORIGIN_WHITELIST:
+    CORS_ORIGIN_WHITELIST = CORS_ORIGIN_WHITELIST.split(',')
