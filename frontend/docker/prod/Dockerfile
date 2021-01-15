@@ -3,7 +3,8 @@ RUN mkdir /frontend
 WORKDIR /frontend
 COPY package*.json ./
 RUN npm install
-COPY ./ .
+COPY . /frontend/
+COPY ./docker/prod/.env /frontend/
 RUN npm run build
 
 FROM nginx:1.19-alpine as production-stage

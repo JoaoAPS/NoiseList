@@ -15,9 +15,9 @@ Vue.use(BootstrapVue)
 Vue.component("v-select", vSelect)
 
 // Axios default values
-Axios.defaults.baseURL = 'http://localhost:80'
-Axios.defaults.headers.get['Accept'] = 'application/json'
-Axios.defaults.headers.post['Accept'] = 'application/json'
+Axios.defaults.baseURL = process.env.VUE_APP_BACKEND_HOST
+Axios.defaults.headers.get["Accept"] = "application/json"
+Axios.defaults.headers.post["Accept"] = "application/json"
 
 new Vue({
   router,
