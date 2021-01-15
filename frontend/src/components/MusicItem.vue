@@ -48,7 +48,7 @@ export default {
   font-size: 0.9rem;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 700px) {
   .music-card {
     width: 80vw;
     min-width: 0;

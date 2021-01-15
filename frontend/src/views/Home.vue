@@ -180,7 +180,7 @@ export default {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .music-list {
     margin-top: 50px;
   }

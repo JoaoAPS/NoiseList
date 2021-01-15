@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style scoped>
-@media (max-width: 400px) {
+@media (max-width: 700px) {
   .card-deck {
     display: flex;
     flex-direction: column;

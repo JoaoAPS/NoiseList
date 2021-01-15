@@ -52,7 +52,7 @@ header {
   margin: 0 20px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 700px) {
   header {
     flex-wrap: wrap-reverse;
   }
