@@ -16,11 +16,13 @@ and instruments in which you can play the music.
 - [Docker-compose](https://docs.docker.com/compose/install/)
 
 ### Instructions
-1. Clone the repository.
-2. `cd` into the repo directory and run on your cli `docker-compose build`.
-3. Run `docker-compose up` whenever you want to run the app. It will be available on [localhost:8000](http://localhost:8000).
+1. Clone the repository and `cd` into the repo directory.
+2. Create a .env file in `backend/docker/dev/` following the example present in the directory.
+3. On the repo root directory, run on your cli `docker-compose build`.
+4. Run `docker-compose up` whenever you want to run the app. It will be available on [localhost:8000](http://localhost:8000).
 
 This will run the developer version.
-To run the production version, run `docker-compose -f docker-compose-prod.yml up`.
+To get the production version, run `docker-compose -f docker-compose-prod.yml build` to build it and
+`docker-compose -f docker-compose-prod.yml up` to run it.
 Note that you first have to create a `.env` file on `backend/docker/prod/` with the enviroment variables.
-They are similar to those in `backend/docker/dev/.env`.
+The app will be available on [localhost:80](http://localhost:80).
