@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import Axios from "axios"
+
 export default {
 	name: "Authentication",
 	
@@ -36,9 +38,11 @@ export default {
 	},
 	
 	methods: {
-		check_password() {
-			if (this.password_text === process.env.VUE_APP_PASSWORD) {
-				localStorage.token = process.env.VUE_APP_SECRET_TOKEN
+		async check_password() {
+			const result = await Axios.post("/api/check_password", {password: this.password_text})
+			
+			if (result.data.correct == 1) {
+				localStorage.token = result.data.token
 				this.$router.push('/')
 			} else {
 				this.wrong = true

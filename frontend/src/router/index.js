@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Authentication from '../views/Authentication.vue'
+import Axios from 'axios'
 
 Vue.use(VueRouter)
 
@@ -22,15 +23,18 @@ const routes = [
 
 const router = new VueRouter({ routes })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.token !== process.env.VUE_APP_SECRET_TOKEN) {
+    const res = localStorage.token === null ? {data: {correct: false}} :
+                await Axios.post('/api/check_token', {token: localStorage.token})
+    
+    if (res.data.correct) {
+      next()
+    } else {
       next({
         path: '/authentication',
         params: { nextUrl: to.fullPath }
       })
-    } else {
-      next()
     }
   } else {
     next()
