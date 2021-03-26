@@ -7,7 +7,16 @@ It is specially useful to remeber musics you know how to play.
 Each music in the list also holds information about its language, tags the user can create,
 and instruments in which you can play the music.
 
--->  [Live Demo](http://35.198.7.228/)  <--
+## Live Demo
+
+A live version of this app is available on netlify: https://unruffled-stonebraker-d624fd.netlify.app
+
+
+## Implementation
+
+The backend was built on Python, using Django and Django Rest Framework.
+The frontend was built with VueJS.
+
 
 ## Instalation
 
@@ -27,3 +36,5 @@ To get the production version, run `docker-compose -f docker-compose-prod.yml bu
 `docker-compose -f docker-compose-prod.yml up` to run it.
 Note that you first have to create a `.env` file on `backend/docker/prod/` and `frontend/docker/prod/` following the examples in each directory.
 The app will be available on [localhost:80](http://localhost:80).
+
+
