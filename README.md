@@ -11,6 +11,9 @@ and instruments in which you can play the music.
 
 A live version of this app is available on netlify: https://unruffled-stonebraker-d624fd.netlify.app
 
+The backend server is deployed on the free tier of Heroku, so it may take a few seconds to start up.
+If you open the app and it doesn't seem to work properly, try refreshing to see if the backend is up.
+
 
 ## Implementation
 
