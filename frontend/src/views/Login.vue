@@ -44,7 +44,7 @@ export default {
       if (token) {
         Axios.defaults.headers.common["Authorization"] = `Token ${token}`
         localStorage.setItem("token", token)
-        this.$router.push("home")
+        this.$router.push("app")
       } else {
         this.username = ""
         this.password = ""

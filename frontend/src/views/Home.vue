@@ -3,7 +3,7 @@
     <div
       v-if="isLoading"
       class="d-flex align-items-center justify-content-center"
-      style="width: 100vw; height:100vh;"
+      style="width: 100vw; height: 100vh"
     >
       <b-spinner label="Loading" class="m-auto"></b-spinner>
     </div>
@@ -60,7 +60,7 @@ export default {
       show_filters: false,
     }
   },
-  computed: mapGetters(["allMusics", "filteredMusics"]),
+  computed: mapGetters(["allMusics", "filteredMusics", "token"]),
 
   methods: {
     ...mapActions([
@@ -115,6 +115,8 @@ export default {
 
   mounted() {
     this.isLoading = true
+
+    if (!this.token) this.$router.push("login")
 
     this.fetchMusics()
     this.fetchArtists()

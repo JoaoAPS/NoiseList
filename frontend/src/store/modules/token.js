@@ -5,7 +5,12 @@ const state = {
 }
 
 const getters = {
-  token: state => state.token,
+  token: state => {
+    if (state.token) return state.token
+    const localStorageToken = localStorage.getItem("token")
+    if (localStorageToken) return localStorageToken
+    return null
+  },
 }
 
 const actions = {
