@@ -12,10 +12,14 @@
       @update="$emit('search', searchText)"
       style="font-family: Cambria, FontAwesome"
     ></b-form-input>
+
+    <button class="btn btn-outline-secondary btn-sm mx-2" @click="handleLogout">Logout</button>
   </header>
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   name: "Header",
 
@@ -23,6 +27,15 @@ export default {
     return {
       searchText: "",
     }
+  },
+
+  methods: {
+    ...mapActions(["logout"]),
+
+    handleLogout() {
+      this.logout()
+      this.$router.push("login")
+    },
   },
 }
 </script>

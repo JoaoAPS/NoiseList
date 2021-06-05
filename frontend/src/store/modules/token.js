@@ -1,7 +1,7 @@
 import Axios from "axios"
 
 const state = {
-  token: "",
+  token: null,
 }
 
 const getters = {
@@ -26,11 +26,20 @@ const actions = {
       console.log(err)
     }
   },
+
+  logout({ commit }) {
+    localStorage.removeItem("token")
+    commit("clearToken")
+  },
 }
 
 const mutations = {
   setToken(state, token) {
     state.token = token
+  },
+
+  clearToken(state) {
+    state.token = null
   },
 }
 
