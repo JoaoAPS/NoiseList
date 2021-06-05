@@ -18,6 +18,8 @@ Vue.component("v-select", vSelect)
 Axios.defaults.baseURL = process.env.VUE_APP_BACKEND_HOST
 Axios.defaults.headers.get["Accept"] = "application/json"
 Axios.defaults.headers.post["Accept"] = "application/json"
+const token = localStorage.getItem("token")
+if (token) Axios.defaults.headers.common["Authorization"] = `Token ${token}`
 
 new Vue({
   router,

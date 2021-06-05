@@ -11,5 +11,5 @@ urlpatterns = [
     path('api/', include('styles.urls')),
     path('api/', include('tags.urls')),
     path('api/', include('instruments.urls')),
-    path('api/generate-token/', views.obtain_auth_token)
+    path('api/get-token/', views.obtain_auth_token)
 ]
